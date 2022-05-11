@@ -1,0 +1,24 @@
+import cv2
+import numpy as np
+import glob
+
+def makevideo():
+    img_array = []
+    for filename in glob.glob('/home/flychen59/SPADE/datasets/results/cityscapes8/test_50/synthesized_image/*.png'):
+        img = cv2.imread(filename)
+        height, width, layers = img.shape
+        size = (width, height)
+        img_array.append(img)
+
+    out = cv2.VideoWriter('/home/flychen59/SPADE/datasets/results/cityscapes8/test_50/video2_v2.avi', cv2.VideoWriter_fourcc(*'DIVX'), 30, size)
+
+    for i in range(len(img_array)):
+        out.write(img_array[i])
+    out.release()
+
+
+
+
+
+if __name__ == '__main__':
+    makevideo()
